@@ -1,6 +1,61 @@
-# TODO (CP2): file này quyết định thứ KHÔNG được copy vào image.
-# Bỏ sót .env = leak secret vào image. Bỏ sót .git = image phình to.
-# Bổ sung đủ các mục còn thiếu — xem tests/test_cp2.py để biết yêu cầu.
+# ═══════════════════════════════════════════════════════════════════
+# CP2 — quyết định thứ KHÔNG được copy vào image.
+# ═══════════════════════════════════════════════════════════════════
 
+# Secret — TUYỆT ĐỐI không được vào image.
+.env
+.env.*
+*.pem
+*.key
+
+# Git — image phình to, mà còn leak toàn bộ lịch sử commit.
 .git
 .gitignore
+.gitattributes
+
+# Python cache / build artifacts.
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtualenv — không bao giờ copy vào image.
+.venv/
+venv/
+env/
+ENV/
+
+# Test — không cần trong image production.
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE / OS.
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Tài liệu, notebook, CI — không cần trong runtime image.
+*.md
+!README.md
+notebooks/
+.github/
+.gitlab-ci.yml
+
+# Docker files themselves — image không cần chứa chúng.
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Dữ liệu local.
+redis-data/
+*.log
